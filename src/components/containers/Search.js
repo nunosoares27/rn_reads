@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { DebounceInput } from "react-debounce-input";
 import * as BooksAPI from "./../../BooksAPI";
-import ChangeShelf from "../ChangeShelf";
-import BookThumbnail from "../../icons/BookThumbnail.png";
+import Book from '../Book';
 
 class Search extends Component {
   constructor(props) {
@@ -72,7 +71,7 @@ class Search extends Component {
             {isLoading && (
               <div>
                 <li className="loader" />
-                <h1 className="loadText">Loading</h1>
+                <h1 className="loadText">Content is Loading</h1>
               </div>
             )}
             {!isLoading &&
@@ -81,36 +80,7 @@ class Search extends Component {
               ) : (
                 searchedBooks.map(book => (
                   <li key={book.id}>
-                    <div className="book">
-                      <div className="book-top">
-                        <div
-                          className="book-cover"
-                          style={{
-                            width: 128,
-                            height: 193,
-                            backgroundImage: `url("${book.imageLinks
-                              ? book.imageLinks.smallThumbnail
-                              : BookThumbnail}")`
-                          }}
-                        />
-
-                        <ChangeShelf
-                          onChangeShelf={this.props.onChangeShelf}
-                          book={book}
-                        />
-                      </div>
-                      <a
-                        className="book-title"
-                        target="_blank"
-                        href={book.previewLink}
-                      >
-                        {book.title}
-                      </a>
-
-                      <div className="book-authors">
-                        {book.authors && book.authors.concat().join(" | ")}
-                      </div>
-                    </div>
+                    <Book book={book} onChangeShelf={this.props.onChangeShelf} />
                   </li>
                 ))
               ))}
