@@ -2,8 +2,18 @@
 A bookshelf app that allows user to select and categorize books as you have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that you will use to persist information as you interact with the application.
 
 ![](/screenshots/MyReads_screenshot01.png)
+
+### Animated loading feature
+
+
 ![](/screenshots/MyReads_screenshot02.png)
+
+
+### Search feature
+
+
 ![](/screenshots/MyReads_screenshot03.png)
+
 
 ## Requirements
 * npm
