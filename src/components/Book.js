@@ -29,4 +29,5 @@ const Book = ({ book, onChangeShelf }) => {
     </div>
   );
 };
+
 export default Book;

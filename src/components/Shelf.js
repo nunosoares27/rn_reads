@@ -1,5 +1,5 @@
 import React from "react";
-import Book from './Book';
+import Book from "./Book";
 
 const Shelf = props => {
   return (
@@ -12,7 +12,12 @@ const Shelf = props => {
       </h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
-          {props.isLoading && (<div><li className="loader" /><h1 className="loadText">Content is Loading</h1></div>)}
+          {props.isLoading && (
+            <div>
+              <li className="loader" />
+              <h1 className="loadText">Content is Loading</h1>
+            </div>
+          )}
           {!props.isLoading && props.books.length !== 0 ? (
             props.books.map(book => {
               return (
