@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { DebounceInput } from "react-debounce-input";
-import * as BooksAPI from './../../BooksAPI';
+import * as BooksAPI from "./../../BooksAPI";
 import ChangeShelf from "../ChangeShelf";
 import BookThumbnail from "../../icons/BookThumbnail.png";
 
@@ -14,10 +14,12 @@ class Search extends Component {
       searchedBooks: []
     };
     this.updateQuery = this.updateQuery.bind(this);
-    this.mergeSearchResultWithBooks = this.mergeSearchResultWithBooks.bind(this);
+    this.mergeSearchResultWithBooks = this.mergeSearchResultWithBooks.bind(
+      this
+    );
   }
 
-    updateQuery = query => {
+  updateQuery = query => {
     this.setState(() => ({
       query,
       isLoading: true
@@ -32,7 +34,7 @@ class Search extends Component {
     BooksAPI.search(query).then(books => {
       this.setState(currentState => ({
         searchedBooks:
-          !currentState.query || !books || books.error  === "empty query"
+          !currentState.query || !books || books.error === "empty query"
             ? []
             : this.mergeSearchResultWithBooks(books),
         isLoading: false
@@ -67,53 +69,55 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {isLoading && <li className="loader" />}
+            {isLoading && (
+              <div>
+                <li className="loader" />
+                <h1 className="loadText">Loading</h1>
+              </div>
+            )}
             {!isLoading &&
               (searchedBooks.length === 0 ? (
                 <li className="message">No Books found</li>
-              ) : ( 
+              ) : (
                 searchedBooks.map(book => (
-                 <li key={book.id}>
-                  <div className="book">
-                    <div className="book-top">
-                      <div
-                        className="book-cover"
-                        style={{
-                          width: 128,
-                          height: 193,
-                          backgroundImage: `url("${book.imageLinks
-                            ? book.imageLinks.smallThumbnail
-                            : BookThumbnail}")`
-                        }}
-                      />
+                  <li key={book.id}>
+                    <div className="book">
+                      <div className="book-top">
+                        <div
+                          className="book-cover"
+                          style={{
+                            width: 128,
+                            height: 193,
+                            backgroundImage: `url("${book.imageLinks
+                              ? book.imageLinks.smallThumbnail
+                              : BookThumbnail}")`
+                          }}
+                        />
 
-                      <ChangeShelf
-                        onChangeShelf={this.props.onChangeShelf} 
-                        book={book}
-                      />
-                    </div>
-                    <a
-                      className="book-title"
-                      target="_blank"
-                      href={book.previewLink}
-                    >
-                      {book.title}
-                    </a>
-                   
-                   
+                        <ChangeShelf
+                          onChangeShelf={this.props.onChangeShelf}
+                          book={book}
+                        />
+                      </div>
+                      <a
+                        className="book-title"
+                        target="_blank"
+                        href={book.previewLink}
+                      >
+                        {book.title}
+                      </a>
+
                       <div className="book-authors">
                         {book.authors && book.authors.concat().join(" | ")}
                       </div>
-                   
-                  </div>
-                </li>
+                    </div>
+                  </li>
                 ))
               ))}
           </ol>
         </div>
       </div>
     );
-  
   }
 }
 export default Search;

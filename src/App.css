@@ -10,6 +10,16 @@ body, .app {
   color: white;
 }
 
+.loadText{
+  position: relative;
+  float: left;
+  top: 25vh;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  color: white;
+}
+
 /* main page */
 
 .list-books-title {

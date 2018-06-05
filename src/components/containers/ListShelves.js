@@ -12,7 +12,7 @@ const ListShelves = (props) =>  {
         </div>
 
         <div className="list-books-content">
-            {props.isLoading && <li className="loader" />}
+            {props.isLoading && (<div><li className="loader" /><h1 className="loadText">Loading</h1></div>)}
             
             {!props.isLoading && BOOK_SHELVES.map(shelf => {
             return (
